@@ -2,7 +2,7 @@ package br.com.alura.screenmatch.domain.filme;
 
 public class Filme {
     private String nome;
-    private Integer dureacaoEmMinutos;
+    private Integer duracaoEmMinutos;
     private Integer anoLancamento;
     private String genero;
 
@@ -10,7 +10,7 @@ public class Filme {
     public Filme (DadosCadastrosFilmes dados){
         this.anoLancamento = dados.ano();
         this.genero = dados.genero();
-        this.dureacaoEmMinutos = dados.duracao();;
+        this.duracaoEmMinutos = dados.duracao();;
         this.nome = dados.nome();
 
     }
@@ -19,15 +19,15 @@ public class Filme {
         return nome;
     }
 
-    public Integer getDureacaoEmMinutos() {
-        return dureacaoEmMinutos;
+    public Integer getDuracaoEmMinutos() {
+        return duracaoEmMinutos;
     }
 
     public Integer getAnoLancamento() {
         return anoLancamento;
     }
 
-    public String getGernero() {
+    public String getGenero() {
         return genero;
     }
 
@@ -35,7 +35,7 @@ public class Filme {
     public String toString() {
         return "Filme{" +
                 "nome='" + nome + '\'' +
-                ", dureacaoEmMinutos=" + dureacaoEmMinutos +
+                ", dureacaoEmMinutos=" + duracaoEmMinutos +
                 ", anoLancamento=" + anoLancamento +
                 ", gernero='" + genero + '\'' +
                 '}';
