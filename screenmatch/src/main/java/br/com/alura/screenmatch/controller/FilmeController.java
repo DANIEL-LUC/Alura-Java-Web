@@ -1,16 +1,16 @@
 package br.com.alura.screenmatch.controller;
 
+import br.com.alura.screenmatch.domain.filme.DadosAlteracaoFilmes;
 import br.com.alura.screenmatch.domain.filme.DadosCadastrosFilmes;
 import br.com.alura.screenmatch.domain.filme.Filme;
 import br.com.alura.screenmatch.domain.filme.FilmeRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +24,12 @@ public class FilmeController {
     @Autowired
     private FilmeRepository repository;
     @GetMapping("/formulario")
-    public String carregaPaginaFormulario(){
+    public String carregaPaginaFormulario(Long id, Model model){
+        if(id != null){
+            var filme = repository.getReferenceById(id);
+            model.addAttribute("filme", filme);
+        }
+
         return "filmes/formulario";
     }
 
@@ -52,6 +57,16 @@ public class FilmeController {
         return "redirect:/filmes";
 
    }
+
+   //@Transactional deixa uma conexão aberta e o Spring verifica se algum dado foi alterado e atualiza no banco
+    @PutMapping
+    @Transactional
+    public String alterarFilme(DadosAlteracaoFilmes dados) {
+       var filme = repository.getReferenceById(dados.id());
+       filme.atualizaDados(dados);
+        return "redirect:/filmes";
+
+    }
 
 
 
